@@ -16,7 +16,7 @@ Install requirements.txt
 pip install -r requirements.txt
 ```
 
-**[WAJIB]** Buka program di folder utils/utils.py. Pada potongan program dibawah
+**[WAJIB]** Buka program di folder utils/utils.py. Cari potongan program
 
 ```
 diameter_mm = diameter_px / 
