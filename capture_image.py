@@ -1,6 +1,7 @@
 import cv2
 import tkinter as tk
 from PIL import Image, ImageTk
+from utils.utils import save_image
 
 
 class CameraApp:
@@ -55,6 +56,8 @@ class CameraApp:
             # Tampilkan gambar hasil capture
             self.captured_label.imgtk = capture_image
             self.captured_label.configure(image=capture_image)
+
+            save_image(frame)
 
     def convert_to_tk_image(self, frame):
         # Convert frame to ImageTk format
