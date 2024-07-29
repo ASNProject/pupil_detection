@@ -4,7 +4,7 @@ from tkinter import messagebox
 import cv2
 import tkinter as tk
 from PIL import Image, ImageTk
-from utils.utils import detect_pupil
+from utils.utils import detect_pupil, save_image, save_to_csv
 
 FILE_PATH = 'hsv_data.json'
 
@@ -93,12 +93,15 @@ class CameraApp:
             self.captured_label.imgtk = capture_image_pupil
             self.captured_label.configure(image=capture_image_pupil)
 
-            # self.save_image(frame)
+            filename = save_image(frame)
+
             # Update the screen_size label with the detected pupil diameter
             if diameter_mm is not None:
                 self.diameter.config(text=f"Diameter Pupil: {diameter_mm:.2f} mm")
+                save_to_csv(filename, diameter_mm)
             else:
                 self.diameter.config(text="Diameter Pupil: Tidak terdeteksi")
+                save_to_csv(filename, "Tidak terdeteksi")
 
     def convert_to_tk_image(self, frame):
         # Convert frame to ImageTk format

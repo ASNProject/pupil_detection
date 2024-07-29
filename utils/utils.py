@@ -1,10 +1,12 @@
-import json
+import csv
 import os
 
 import cv2
 from PIL import Image
 import math
 import numpy as np
+from datetime import datetime
+
 
 # Buka gambar
 # image_path = 'assets/images/1.png'
@@ -64,7 +66,21 @@ def save_image(frame):
     # Create the directory if it doesn't exist
     os.makedirs(save_dir, exist_ok=True)
 
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
     # Define the filename with a timestamp
-    filename = os.path.join(save_dir, "1.png")
+    filename = os.path.join(save_dir, f"captured_image_{timestamp}.png")
     cv2.imwrite(filename, frame)
     print(f"Image saved as {filename}")
+    return  filename
+
+
+def save_to_csv(filename, diameter):
+    csv_file = 'pupil_data.csv'
+    file_exists = os.path.isfile(csv_file)
+
+    with open(csv_file, mode='a', newline='') as file:
+        writer = csv.writer(file)
+        if not file_exists:
+            writer.writerow(['Filename', 'Diameter (mm)'])
+        writer.writerow([filename, diameter])
